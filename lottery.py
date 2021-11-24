@@ -1,31 +1,34 @@
 import random
 from pprint import pprint
+import timer
 
 
 def chois_rull():
-    money = 1000
-    print(f'Приветсвую в лотерее! У вас {money} фишек. Каждый проигрыш отнимет у вас 100 фишек. Удачи)')
+
+    print(f'Приветсвую в лотерее! У вас 1000 фишек. Каждый проигрыш отнимет у вас 100 фишек. Удачи)')
+
     while True:
-        print()
-        chois_list = [[1, 2, 3, 4, 5, 6, 7, 8, 9],
-                      [1, 2, 3, 4, 5, 6, 7, 8, 9],
-                      [1, 2, 3, 4, 5, 6, 7, 8, 9]]
-        pr = 1000000
-        my_list = []
+        start = input('Начать игру: ')
+        money = 1000
+        if start == 'да':
+            chois_list = [[1, 2, 3, 4, 5, 6, 7, 8, 9],
+                          [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                          [1, 2, 3, 4, 5, 6, 7, 8, 9]]
+            pr = 1000000
+            my_list = []
 
-        for i in chois_list:
-            pprint(i)
-        print()
-        # cr = int(input('Ваша ставка:' ))
-        number_1 = int(input('Выберите число из первой строки #1: '))
-        my_list.append(number_1)
-        number_2 = int(input('Выберите число из первой строки #2: '))
-        my_list.append(number_2)
-        number_3 = int(input('Выберите число из первой строки #3: '))
-        my_list.append(number_3)
-        print()
+            for i in chois_list:
+                pprint(i)
+            print()
 
-        for i in chois_list[0]:
+            number_1 = int(input('Выберите число из первой строки #1: '))
+            my_list.append(number_1)
+            number_2 = int(input('Выберите число из первой строки #2: '))
+            my_list.append(number_2)
+            number_3 = int(input('Выберите число из первой строки #3: '))
+            my_list.append(number_3)
+            print()
+
             chois = random.sample(chois_list[1], 3)
 
             if chois == my_list:
@@ -35,10 +38,41 @@ def chois_rull():
                       f'{my_list}\n'
                       f'Ваш баланс: {money}')
 
-            if chois[1] == my_list[1]:
+            elif chois[0] == my_list[0]:
+                money += 10 * (pr // 100)
+                print(f'{chois}\n'
+                      f'{my_list}\n'
+                      f'Ваш баланс: {money}')
+
+            elif chois[0:2] == my_list[0:2]:
                 money += 25 * (pr // 100)
                 print(f'{chois}\n'
-                      f'{my_list}')
+                      f'{my_list}\n'
+                      f'Ваш баланс: {money}')
+
+            if chois[0] == my_list[1]:
+                money += 5 * (pr // 100)
+                print(f'{chois}\n'
+                      f'{my_list}\n'
+                      f'Ваш баланс: {money}')
+
+            elif chois[1] == my_list[0]:
+                money += 5 * (pr // 100)
+                print(f'{chois}\n'
+                      f'{my_list}\n'
+                      f'Ваш баланс: {money}')
+
+            elif chois[1] == my_list[1]:
+                money += 5 * (pr // 100)
+                print(f'{chois}\n'
+                      f'{my_list}\n'
+                      f'Ваш баланс: {money}')
+
+            elif chois[2] == my_list[2]:
+                money += 5 * (pr // 100)
+                print(f'{chois}\n'
+                      f'{my_list}\n'
+                      f'Ваш баланс: {money}')
 
             else:
                 print(f'Не в этот раз:(\n'
@@ -46,7 +80,17 @@ def chois_rull():
                       f'{my_list}\n'
                       f'Попробуйте еще раз!'
                       f'Ваш баланс: {money - 100}')
-                break
+
+            if money == 0:
+                print(f'У вас закончилтсь фишки( они обновляться через 1 минуту. Ожидайте\n'
+                      f'#####################')
+                timer.timer()
+                money = 1000
+                print(f'Ваш баланс обновлен\n'
+                      f'{money} фишек\n')
+
+        if start == 'нет':
+            break
 
 
 def twenty_one():
@@ -90,7 +134,7 @@ def twenty_one():
                           f'Ваш баланс {money}')
 
             else:
-                print(f'Соперник : {comp_card}, {two_comp_card}\n'
+                print(f'Соперник : {comp_card[0]}, {two_comp_card[0]}\n'
                       f'Сумма очков {comp_point}\n\n'
                       f'{user_result}')
                 if point > comp_point:
@@ -100,8 +144,18 @@ def twenty_one():
                 else:
                     money -= 10
                     print(f'Вы проиграли!(\n'
-                          f'Ваш баланс {money}')
-                break
-            
+                          f'Ваш баланс {money}\n')
+
+            if money == 0:
+                print(f'У вас закончилтсь фишки( они обновляться через 1 минуту. Ожидайте\n'
+                      f'#####################')
+                timer.timer()
+                money = 100
+                print(f'Ваш баланс обновлен\n'
+                      f'{money} фишек\n')
+
+        if start == 'нет':
+            break
+
 
 
