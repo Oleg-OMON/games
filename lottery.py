@@ -1,15 +1,18 @@
 import random
 from pprint import pprint
 import timer
+from config import file_path, file_name
+from decorator import logger
 
 
+@logger(file_name, file_path)
 def chois_rull():
 
     print(f'Приветсвую в лотерее! У вас 1000 фишек. Каждый проигрыш отнимет у вас 100 фишек. Удачи)')
-
+    money = 1000
     while True:
         start = input('Начать игру: ')
-        money = 1000
+
         if start == 'да':
             chois_list = [[1, 2, 3, 4, 5, 6, 7, 8, 9],
                           [1, 2, 3, 4, 5, 6, 7, 8, 9],
@@ -93,6 +96,7 @@ def chois_rull():
             break
 
 
+@logger(file_name, file_path)
 def twenty_one():
     money = 100
     print(f'Приветсвую в Игре "ОЧКО"! У вас {money} фишек.'
